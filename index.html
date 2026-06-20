@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For You ... My Apology and Our Future</title>
+    
+    <!-- ======================================================================= -->
+    <!-- FRANK: Google Fonts ... 'Cormorant Garamond' for incredibly elite titles, -->
+    <!-- 'Plus Jakarta Sans' for crisp, modern, pristine reading.               -->
+    <!-- ======================================================================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =================================================================== */
+        /* FRANK: 100% Flat 2D Minimalist Premium Color Palette                */
+        /* Highly elegant warm velvety hues ... Absolutely ZERO harsh black!     */
+        /* =================================================================== */
+        :root {
+            --bg-color: #FAF7F5;       /* Warm soft cream/stone background */
+            --text-main: #3D2F2C;      /* Deep velvety warm cocoa slate for incredibly premium, soft reading */
+            --text-muted: #7A6661;     /* Earthy taupe for secondary descriptions */
+            --accent-rose: #C85A6A;    /* Deep warm rose red for active romantic touches */
+            --accent-hover: #A74352;   /* Deep crimson rose for button active states */
+            --gold-accent: #D4AF37;    /* Classic rich gold for Kintsugi seams & stardust */
+            --border-color: #E6DDD9;   /* Crisp, clean, thin 2D divider lines */
+            --card-bg: #FFFFFF;        /* Pure flat white for content chapters */
+            --shadow-warm: rgba(80, 60, 55, 0.05); /* Gorgeous velvety off black warm shadow */
+            --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* ... FLAWLESS MOBILE & ORIENTATION OPTIMIZATION ... */
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            min-height: 100vh;
+            overflow-x: hidden !important;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.75;
+        }
+
+        #atmosphere-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .mote {
+            position: absolute;
+            background-color: var(--accent-rose);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: driftMote 8s infinite linear;
+        }
+
+        @keyframes driftMote {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0.1; }
+            50% { opacity: 0.25; }
+            100% { transform: translateY(-10px) scale(1.2); opacity: 0; }
+        }
+
+        /* =================================================================== */
+        /* FLOATING SONG CAPSULE                                               */
+        /* =================================================================== */
+        .song-capsule {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            padding: 6px 18px 6px 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            max-width: calc(100vw - 40px);
+        }
+
+        .song-capsule:hover {
+            border-color: var(--accent-rose);
+            transform: scale(1.03);
+        }
+
+        .song-cover-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            animation: spinCover 12s linear infinite;
+            animation-play-state: paused; 
+            flex-shrink: 0;
+        }
+
+        .song-capsule.playing .song-cover-img {
+            animation-play-state: running; 
+        }
+
+        @keyframes spinCover {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .song-info {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+
+        .song-title {
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.1;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .song-status {
+            font-size: 0.75rem;
+            color: var(--accent-rose);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* =================================================================== */
+        /* WELCOME ENTRANCE OVERLAY                                            */
+        /* =================================================================== */
+        .entrance-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto; 
+            overflow-x: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .entrance-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .entrance-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 28px;
+            max-width: 440px;
+            width: 100%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px var(--shadow-warm);
+        }
+
+        /* 🌹 Magnificently animated 2D Vector Rose ... Silky smooth, zero jitter */
+        .rose-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .animated-rose-svg {
+            width: 100px;
+            height: 140px;
+            overflow: visible;
+        }
+
+        .rose-sway-group {
+            transform-origin: 60px 140px;
+            animation: gentleSilkySway 5s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentleSilkySway {
+            0% { transform: rotate(-2.5deg); }
+            100% { transform: rotate(2.5deg); }
+        }
+
+        .rose-stem { fill: none; stroke: #7B9A74; stroke-width: 4.5; stroke-linecap: round; }
+        .rose-leaf { fill: #7B9A74; }
+
+        .entrance-title {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            font-weight: 600;
+            line-height: 1.15;
+            text-align: center;
+        }
+
+        .entrance-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .btn-main {
+            width: 100%;
+            background-color: var(--accent-rose);
+            color: #FFFFFF;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .btn-main:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* =================================================================== */
+        /* MAIN STORY CONTINUOUS MOBILE SCROLL FEED                           */
+        /* =================================================================== */
+        .scroll-container {
+            width: 100%;
+            max-width: 560px;
+            padding: 30px 20px 100px 20px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 70px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            color: var(--accent-rose);
+            font-size: 0.9rem;
+            opacity: 0.6;
+            width: 100%;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            width: 40px;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        .chapter {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .chapter-caption {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--accent-rose);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .chapter-title {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-main);
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        .chapter-body {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            width: 100%;
+            text-align: left;
+        }
+
+        .chapter-body p {
+            margin-bottom: 18px;
+        }
+
+        .chapter-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .callout-box {
+            padding: 20px 24px;
+            background-color: #FAF0EE;
+            border-left: 3px solid var(--accent-rose);
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--accent-rose);
+            line-height: 1.5;
+            width: 100%;
+        }
+
+        .highlight {
+            color: var(--accent-rose);
+            font-weight: 600;
+        }
+
+
+        /* =================================================================== */
+        /* 💖 Adoration Dispenser                                              */
+        /* =================================================================== */
+        .dispenser-box {
+            width: 100%;
+            background-color: #FAF0EE;
+            border: 1px solid rgba(200, 90, 106, 0.25);
+            border-radius: 20px;
+            padding: 32px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dispenser-title {
+            font-family: var(--font-serif);
+            font-size: 2.3rem;
+            font-weight: 600;
+            color: var(--accent-rose);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .dispenser-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            max-width: 400px;
+        }
+
+        .dispenser-note-card {
+            background-color: #FFFFFF;
+            border-left: 4px solid var(--accent-rose);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px var(--shadow-warm);
+            min-height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dispenser-quote {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--accent-rose);
+            font-style: italic;
+            line-height: 1.4;
+            animation: fadeInDispense 0.4s ease;
+            width: 100%;
+        }
+
+        @keyframes fadeInDispense {
+            0% { opacity: 0; transform: scale(0.96); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .btn-pill-dispense {
+            background-color: var(--accent-rose);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(200, 90, 106, 0.2);
+            max-width: 100%;
+        }
+
+        .btn-pill-dispense:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+
+        /* =================================================================== */
+        /* 🌸 Core Memory Folders                                              */
+        /* =================================================================== */
+        .memory-section {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+        }
+
+        .memories-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .memory-folder {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .memory-folder:hover {
+            border-color: var(--accent-rose);
+        }
+
+        .memory-folder-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            background-color: #FFFFFF;
+        }
+
+        .folder-icon {
+            color: var(--accent-rose);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .memory-folder.open .folder-icon {
+            transform: rotate(180deg);
+        }
+
+        .memory-folder.open .memory-folder-header {
+            color: var(--accent-rose);
+            background-color: #FAF0EE;
+            border-bottom: 1px solid rgba(200, 90, 106, 0.15);
+        }
+
+        .memory-folder-body {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.5;
+            background-color: #FFFFFF;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+        }
+
+        .memory-folder.open .memory-folder-body {
+            max-height: 200px;
+            padding: 20px;
+        }
+
+
+        /* =================================================================== */
+        /* ☁️ Wipe Away The Mist                                               */
+        /* =================================================================== */
+        .mist-card {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+        }
+
+        .mist-canvas-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 20px;
+            border: 2px solid #EAE0DD;
+            background-color: #FDF4F5;
+            box-shadow: inset 0 0 20px rgba(200, 90, 106, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mist-secret-content {
+            position: absolute;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            z-index: 2;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .mist-secret-title {
+            font-family: var(--font-serif);
+            font-size: 1.85rem;
+            font-weight: 600;
+            color: var(--accent-rose);
+            margin-bottom: 6px;
+        }
+
+        .mist-secret-body {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-style: italic;
+            line-height: 1.45;
+        }
+
+        .mist-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 5;
+            cursor: grab;
+        }
+
+        .mist-canvas:active {
+            cursor: grabbing;
+        }
+
+
+        /* =================================================================== */
+        /* BUTTERFLY MAGIC TOUCH: "Hold Your Thumb Here to Sync Heartbeats"   */
+        /* =================================================================== */
+        .butterfly-card {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.6s ease;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+        }
+
+        .butterfly-card.synced {
+            background-color: #FDF4F5;
+            border-color: var(--accent-rose);
+        }
+
+        .touch-ring-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .touch-radar {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent-rose);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: pulseRadar 2.5s infinite ease-out;
+        }
+
+        @keyframes pulseRadar {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        .touch-pad {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            background-color: #FAF0EE;
+            border: 2px solid var(--accent-rose);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2rem;
+            z-index: 5;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 15px rgba(200, 90, 106, 0.1);
+        }
+
+        .touch-pad.active {
+            transform: scale(0.92);
+            background-color: var(--accent-rose);
+            color: white;
+        }
+
+        .touch-svg-progress {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .progress-circle-track { fill: none; stroke: transparent; stroke-width: 6; }
+        .progress-circle-fill {
+            fill: none;
+            stroke: var(--accent-rose);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 339.29; 
+            stroke-dashoffset: 339.29;
+            transition: stroke-dashoffset 0.1s linear;
+        }
+
+        .butterfly-instruction {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent-rose);
+            margin-top: 8px;
+        }
+
+        .secret-message-box {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.8s ease;
+            width: 100%;
+        }
+
+        .butterfly-card.synced .secret-message-box {
+            max-height: 250px;
+            opacity: 1;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(200, 90, 106, 0.2);
+        }
+
+        .secret-script {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--accent-rose);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+
+        /* =================================================================== */
+        /* INTERACTIVE 2D FOOLPROOF GAME: "Rebuild Our Kintsugi Heart"         */
+        /* =================================================================== */
+        .game-section {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+        }
+
+        .game-header {
+            margin-bottom: 24px;
+            width: 100%;
+        }
+
+        .game-title {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .game-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .kintsugi-heart-box {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kintsugi-heart-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 8px 20px rgba(200, 90, 106, 0.12));
+            transition: transform 0.5s ease;
+        }
+
+        .kintsugi-heart-box.healed .kintsugi-heart-svg {
+            animation: gentleHeartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes gentleHeartbeat {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 8px 20px rgba(200, 90, 106, 0.12)); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 12px 25px rgba(212, 175, 55, 0.4)); }
+        }
+
+        .heart-base { fill: #FAF0EE; stroke: #EAE0DD; stroke-width: 2; transition: fill 0.6s ease; }
+        .heart-fracture { fill: none; stroke: #DCD0CC; stroke-width: 3.5; stroke-dasharray: 4; transition: all 0.6s ease; }
+        
+        .fracture-healed { stroke: var(--gold-accent) !important; stroke-dasharray: none !important; stroke-width: 4.5 !important; filter: drop-shadow(0 0 5px rgba(212,175,55,0.8)); }
+        .heart-base-healed { fill: #FDF4F5 !important; stroke: var(--accent-rose) !important; }
+
+        .threads-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .thread-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 16px 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: left;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .thread-card:hover {
+            border-color: var(--accent-rose);
+            transform: translateX(3px);
+        }
+
+        .thread-card.fastened {
+            background-color: #FAF0EE;
+            border-color: var(--gold-accent);
+            box-shadow: inset 4px 0 0 var(--gold-accent);
+        }
+
+        .thread-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1;
+        }
+
+        .thread-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
+
+        .thread-vow-text {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--accent-rose);
+            font-style: italic;
+            display: none; 
+        }
+
+        .thread-card.fastened .thread-vow-text {
+            display: block;
+            animation: fadeInVow 0.4s ease;
+        }
+
+        @keyframes fadeInVow {
+            0% { opacity: 0; transform: translateY(5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .thread-action-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold-accent);
+            background-color: #FFFFFF;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 5px 12px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .thread-card.fastened .thread-action-badge {
+            background-color: var(--gold-accent);
+            color: #FFFFFF;
+            content: "✦ Fastened";
+        }
+
+        .game-completion-banner {
+            margin-top: 25px;
+            background-color: #FDF4F5;
+            border: 2px solid var(--accent-rose);
+            padding: 20px;
+            border-radius: 16px;
+            width: 100%;
+            display: none;
+            animation: fadeInBanner 0.6s ease;
+        }
+
+        .game-completion-banner.show {
+            display: block;
+        }
+
+        @keyframes fadeInBanner {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .completion-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--accent-rose);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .completion-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+
+        /* =================================================================== */
+        /* 🏮 Wish Lantern Release                                            */
+        /* =================================================================== */
+        .lantern-card {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+        }
+
+        .lantern-interactive-area {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(180deg, #1A1423 0%, #3D2638 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 20px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .l-star {
+            position: absolute;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .sky-lantern-elem {
+            font-size: 4.5rem;
+            filter: drop-shadow(0 0 15px rgba(243, 156, 18, 0.8));
+            transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1), opacity 3s ease;
+            z-index: 10;
+        }
+
+        .lantern-interactive-area.released .sky-lantern-elem {
+            transform: translateY(-320px) scale(0.6);
+            opacity: 0;
+        }
+
+        .lantern-helper {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #F1C40F;
+            margin-top: 10px;
+            animation: pulseHelper 2s infinite alternate;
+        }
+
+        @keyframes pulseHelper {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .lantern-success-toast {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: rgba(255,255,255,0.95);
+            padding: 20px 25px;
+            border-radius: 16px;
+            color: var(--accent-rose);
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            z-index: 20;
+            width: 85%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(80,60,55,0.3);
+        }
+
+        .lantern-success-toast.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+
+        /* =================================================================== */
+        /* FAIRY TALE ENDING & DIRECT INSTAGRAM BUTTON                         */
+        /* =================================================================== */
+        .action-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 20px var(--shadow-warm);
+        }
+
+        .action-question {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+        }
+
+        .btn-sub {
+            width: 100%;
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-sub:hover {
+            background-color: #F7F3F0;
+            color: var(--text-main);
+        }
+
+        /* Success / Respect Toast Modal */
+        #portal-toast-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(61, 47, 44, 0.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #portal-toast-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 24px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(61,47,44,0.4);
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--accent-rose);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .modal-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .modal-close {
+            width: 100%;
+            background-color: var(--accent-rose);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .modal-close:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* 2D Floating Confetti Container */
+        #confetti-2d-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1900;
+            overflow: hidden;
+        }
+
+        .confetti-flake {
+            position: absolute;
+            font-size: 1.3rem;
+            user-select: none;
+            animation: floatDown 4s linear forwards;
+        }
+
+        @keyframes floatDown {
+            0% { transform: translateY(-30px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+
+    <script>
+        // =====================================================================
+        // FRANK: 0. FORCE ABSOLUTE TOP & RESET ON EVERY PAGE OPEN/REFRESH
+        // =====================================================================
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        };
+        window.addEventListener('load', function () {
+            window.scrollTo(0, 0);
+            document.getElementById('entrance-overlay').classList.remove('hidden');
+        });
+    </script>
+</head>
+<body>
+
+    <!-- ======================================================================= -->
+    <!-- FRANK'S BACKEND AUDIO & JPEG CONFIGURATION                              -->
+    <!-- ======================================================================= -->
+    <audio id="bg-audio" src="our-song.mp3" loop></audio>
+
+    <!-- Floating Atmosphere Particles -->
+    <div id="atmosphere-container"></div>
+
+    <!-- Discreet Floating Song Capsule -->
+    <div class="song-capsule" id="song-capsule" title="Click to Play or Pause our song">
+        <img src="song-cover.jpg" alt="🎵" class="song-cover-img" id="song-cover-img" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2238%22 height=%2238%22 viewBox=%220 0 38 38%22><circle cx=%2219%22 cy=%2219%22 r=%2219%22 fill=%22%23FAF0EE%22/><text x=%2219%22 y=%2224%22 font-size=%2216%22 text-anchor=%22middle%22>🎵</text></svg>'">
+        
+        <div class="song-info">
+            <span class="song-title">Phir Le Aya Dil</span>
+            <span class="song-status" id="song-status-text">Click to Play 🎶</span>
+        </div>
+    </div>
+
+    <!-- 2D Confetti Layer -->
+    <div id="confetti-2d-container"></div>
+
+    <!-- ======================================================================= -->
+    <!-- WELCOME ENTRANCE OVERLAY                                              -->
+    <!-- ======================================================================= -->
+    <div class="entrance-overlay" id="entrance-overlay">
+        <div class="entrance-card">
+            
+            <!-- 🌹 Exquisitely animated 2D Vector Rose ... Silky smooth, zero jitter -->
+            <div class="rose-container">
+                <svg class="animated-rose-svg" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="roseGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#C85A6A" stop-opacity="0.35" />
+                            <stop offset="100%" stop-color="#FAF7F5" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Soft glowing pulsing halo right behind the rose -->
+                    <circle cx="60" cy="70" r="50" fill="url(#roseGlow)">
+                        <animate attributeName="r" values="45; 55; 45" dur="4s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.6; 1; 0.6" dur="4s" repeatCount="indefinite" />
+                    </circle>
+
+                    <!-- Magical drifting stardust sparkles right around the blossom -->
+                    <g fill="#D4AF37">
+                        <circle cx="35" cy="45" r="1.5">
+                            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-6; 0,0" dur="3s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.2; 1; 0.2" dur="3s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="85" cy="55" r="2">
+                            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0" dur="4s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.2; 1; 0.2" dur="4s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="45" cy="85" r="1">
+                            <animateTransform attributeName="transform" type="translate" values="0,0; 0,-5; 0,0" dur="2.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0.2; 1; 0.2" dur="2.5s" repeatCount="indefinite" />
+                        </circle>
+                    </g>
+
+                    <!-- Main Rose Structure incredibly softly swaying around bottom of stem -->
+                    <g class="rose-sway-group">
+                        <path class="rose-stem" d="M60,85 Q65,120 58,150" />
+                        <path class="rose-leaf" d="M62,105 Q85,95 80,115 Q65,115 62,105" />
+                        <path class="rose-leaf" d="M58,120 Q35,115 40,135 Q55,130 58,120" />
+                        
+                        <!-- Blossom Petals softly expanding and breathing -->
+                        <g class="rose-blossom">
+                            <path fill="#B34454" d="M40,70 Q60,40 80,70 Q60,90 40,70" />
+                            
+                            <path fill="var(--accent-rose)" d="M45,75 Q60,35 75,75 Q60,95 45,75">
+                                <animate attributeName="d" values="M45,75 Q60,35 75,75 Q60,95 45,75; M42,75 Q60,30 78,75 Q60,98 42,75; M45,75 Q60,35 75,75 Q60,95 45,75" dur="4s" repeatCount="indefinite" />
+                            </path>
+                            
+                            <path fill="#D97583" d="M52,77 Q60,50 68,77 Q60,87 52,77">
+                                <animate attributeName="d" values="M52,77 Q60,50 68,77 Q60,87 52,77; M50,77 Q60,45 70,77 Q60,89 50,77; M52,77 Q60,50 68,77 Q60,87 52,77" dur="4s" repeatCount="indefinite" />
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+            <h1 class="entrance-title">For My Beautiful Girl</h1>
+            <p class="entrance-subtitle">I have prepared this message from the absolute deepest corners of my soul. Please tap below to unlock my letters and start our song.</p>
+            
+            <button class="btn-main" id="start-journey-btn">
+                <span>💌</span> Open My Heart
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ... CONTINUOUS MOBILE FIRST LONG SCROLL FEED ... -->
+    <div class="scroll-container">
+
+        <!-- Chapter 1: The Sanctuary -->
+        <div class="chapter">
+            <span class="chapter-caption">Who You Are To Me</span>
+            <h2 class="chapter-title">My Sanctuary,</h2>
+            <div class="chapter-body">
+                <p>Before I say how deeply sorry I am, I want to remind you of what you mean to me. You are the absolute best thing that has ever happened to my life.</p>
+                <p>I adore the gorgeous laugh that instantly brightens up my darkest days, the deep warmth of your hand resting inside mine, and the profound, gentle peace I feel whenever I look into your beautiful eyes.</p>
+                <p>You are my home, and my heart belongs entirely to you.</p>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- 💖 Adoration Dispenser -->
+        <div class="dispenser-box" id="dispenser-box">
+            <span class="chapter-caption">100 Reasons Why</span>
+            <h3 class="dispenser-title">Reasons I Adore You</h3>
+            <p class="dispenser-text">Whenever you feel even a single shadow of doubt, tap the love note below to see another reason why my soul fell in love with you.</p>
+            
+            <div class="dispenser-note-card">
+                <div class="dispenser-quote" id="dispenser-quote">
+                    "I adore how gentle and radiant your eyes look in the sunlight." 🌸
+                </div>
+            </div>
+
+            <button class="btn-pill-dispense" id="dispense-btn">
+                <span>✨</span> Reveal Another Note
+            </button>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- 🌸 Core Reflections Accordion -->
+        <div class="memory-section">
+            <span class="chapter-caption">Core Reflections</span>
+            <h3 class="chapter-title" style="text-align:center;">What I Miss Most</h3>
+            <p style="font-size:0.95rem; color:var(--text-muted); text-align:center; margin-bottom:10px;">While we have been apart, I realized with complete certainty that my absolute favorite moments in life were the quietest ones we shared:<br><br><b>Tap each folder below to open my shared memories of us:</b></p>
+            
+            <div class="memories-grid">
+                
+                <div class="memory-folder">
+                    <div class="memory-folder-header">
+                        <span>✦ 1. Our Peaceful Mornings</span>
+                        <span class="folder-icon">▼</span>
+                    </div>
+                    <div class="memory-folder-body">
+                        "I miss waking up and feeling absolute gratitude, knowing that my favorite person in the entire universe was just a sweet phone call or message away."
+                    </div>
+                </div>
+
+                <div class="memory-folder">
+                    <div class="memory-folder-header">
+                        <span>✦ 2. Our Unstoppable Cringe Jokes</span>
+                        <span class="folder-icon">▼</span>
+                    </div>
+                    <div class="memory-folder-body">
+                        "I miss how we used to make those cringy jokes about everthing, like how can forget I was your 'Achha Jii' and you were mine 'Hanji'"
+                    </div>
+                </div>
+
+                <div class="memory-folder">
+                    <div class="memory-folder-header">
+                        <span>✦ 3. The Absolute Sanctuary</span>
+                        <span class="folder-icon">▼</span>
+                    </div>
+                    <div class="memory-folder-body">
+                        "I miss the profound feeling of holding your hand and experiencing pure, unshakable security ... knowing that as long as we had each other, everything in life would be truly okay."
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- Chapter 4: June 21st Regret -->
+        <div class="chapter">
+            <span class="chapter-caption">The Words I Spoke</span>
+            <h2 class="chapter-title">June 21st</h2>
+            <div class="chapter-body">
+                <p>I have replayed that exact day in my mind a thousand times over. Every single time I remember what I said to you on <span class="highlight">June 21st</span>, my soul sinks with an overwhelming weight of sadness and agonizing regret.</p>
+                <p>I should never, ever have said that, should have never bringed that topic. Those foolish words did not represent my real truth or what actually lives inside my heart ... they were only a moment of utter foolishness....my overthinking.</p>
+                
+                <div class="callout-box">
+                    If I had not spoken those hurtful words, we would still be holding hands, laughing, and living our beautiful life together right now.
+                </div>
+
+                <p>If I could reach back into time and swallow what I said, I would do it in a single heartbeat.</p>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- Chapter 5: How I Treated You -->
+        <div class="chapter">
+            <span class="chapter-caption">Overall Reflections</span>
+            <h2 class="chapter-title">How I Treated You</h2>
+            <div class="chapter-body">
+                <p>But my honest apology is not just for what happened on June 21st. I want to apologize to you from the absolute deep roots of my spirit for how I treated you overall throughout our shared story.</p>
+                <p>You offered me your most precious warmth, your unwavering trust, and your gentle care. You deserved a partner who was always patient, incredibly gentle, and deeply protective of your peace.</p>
+                <p>You deserved to be treated like the beautiful queen you are, and I am so deeply sorry for taking your gorgeous light for granted.</p>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- Chapter 6: Moving Forward -->
+        <div class="chapter">
+            <span class="chapter-caption">Moving Forward</span>
+            <h2 class="chapter-title">My Dedication to Change</h2>
+            <div class="chapter-body">
+                <p>I do not want to simply offer you empty apologies ... I want to prove my dedication with true change and real action.</p>
+                <p>I am actively working hard every single day to improve myself, to grow stronger, wiser, and to become the exact kind of man who deserves your gentle heart.</p>
+                <div class="callout-box">
+                    I know with absolute certainty that next time, it will not be the same. I am rebuilding myself to become the peaceful home and enduring sanctuary you have always truly deserved.
+                </div>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- ☁️ Wiping WIndow Mist -->
+        <div class="mist-card" id="mist-card">
+            <span class="chapter-caption">A Timeless Vow</span>
+            <h3 class="chapter-title" style="font-size:2.6rem;">Wipe Away The Mist</h3>
+            <p style="font-size:0.95rem; color:var(--text-muted); max-width:400px; margin: 0 auto;">Sometimes our foolish mistakes cloud the gorgeous view of what truly matters.<br><br><b>Use your finger to gently wipe away the fog below and see what lives forever beneath.</b></p>
+
+            <div class="mist-canvas-wrapper" id="mist-canvas-wrapper">
+                <div class="mist-secret-content">
+                    <div class="mist-secret-title">You Are My Forever ♾️</div>
+                    <div class="mist-secret-body">
+                        "Seasons will change, days will pass, but my soul will always choose you. I am so deeply sorry, my love. Let me be your sanctuary forever."
+                    </div>
+                </div>
+
+                <canvas class="mist-canvas" id="mist-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- BUTTERFLY CHAPTER: "HOLD YOUR THUMB TO SYNC HEARTBEATS" -->
+        <div class="butterfly-card" id="butterfly-card">
+            <span class="chapter-caption" style="margin-bottom:6px;">An Intimate Connection</span>
+            <h3 class="chapter-title" style="font-size:2.4rem; margin-bottom:12px; text-align:center;">Sync Our Heartbeats</h3>
+            <p style="font-size:0.95rem; color:var(--text-muted);">Even from apart, my heart has never stopped beating for you.<br><br><b>Press and hold your thumb/finger on the glowing pad below for 3 seconds to sync your heart with mine.</b></p>
+            
+            <div class="touch-ring-container" id="touch-ring-container">
+                <div class="touch-radar"></div>
+                <div class="touch-pad" id="touch-pad">🦋</div>
+                
+                <svg class="touch-svg-progress">
+                    <circle class="progress-circle-track" cx="60" cy="60" r="54" />
+                    <circle class="progress-circle-fill" id="progress-circle-fill" cx="60" cy="60" r="54" />
+                </svg>
+            </div>
+
+            <div class="butterfly-instruction" id="butterfly-instruction">
+                ‹ Hold Pad to Sync ›
+            </div>
+
+            <div class="secret-message-box">
+                <div class="secret-script">
+                    "We belong together. I promise to always cherish your beautiful soul and protect our love forever."
+                </div>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- CHAPTER 8: INTERACTIVE FOOLPROOF GAME: "Rebuild Our Heart" -->
+        <div class="game-section">
+            <div class="game-header">
+                <h3 class="game-title">Rebuild Our Heart</h3>
+                <p class="game-subtitle">A heart that is healed with true love and gentle patience becomes much stronger where it was once fractured.<br><br><b>Tap the 5 golden Kintsugi cards below to beautifully mend our heart and unlock my vows to you!</b></p>
+            </div>
+
+            <div class="kintsugi-heart-box" id="kintsugi-heart-box">
+                <svg class="kintsugi-heart-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path class="heart-base" id="heart-base-shape" d="M50,88 Q20,65 10,40 Q5,20 25,12 Q40,6 50,30 Q60,6 75,12 Q95,20 90,40 Q80,65 50,88 Z" />
+                    
+                    <path class="heart-fracture" id="frac-1" d="M18,32 Q35,40 50,30" />
+                    <path class="heart-fracture" id="frac-2" d="M82,32 Q65,40 50,30" />
+                    <path class="heart-fracture" id="frac-3" d="M50,30 Q45,60 50,88" />
+                    <path class="heart-fracture" id="frac-4" d="M15,50 Q35,65 50,60" />
+                    <path class="heart-fracture" id="frac-5" d="M85,50 Q65,65 50,60" />
+                </svg>
+            </div>
+
+            <div class="threads-grid">
+                
+                <div class="thread-card" data-index="1">
+                    <div class="thread-info">
+                        <span class="thread-title">1. Tap to Mend Gentleness</span>
+                        <span class="thread-vow-text">"I promise completely patient, gentle daily love."</span>
+                    </div>
+                    <span class="thread-action-badge">✦ Tap to Fasten</span>
+                </div>
+
+                <div class="thread-card" data-index="2">
+                    <div class="thread-info">
+                        <span class="thread-title">2. Tap to Mend Absolute Peace</span>
+                        <span class="thread-vow-text">"I promise to never speak out of frustration, overthinking or anger again."</span>
+                    </div>
+                    <span class="thread-action-badge">✦ Tap to Fasten</span>
+                </div>
+
+                <div class="thread-card" data-index="3">
+                    <div class="thread-info">
+                        <span class="thread-title">3. Tap to Mend Unshakable Trust</span>
+                        <span class="thread-vow-text">"I promise to be your safest, most reliable sanctuary."</span>
+                    </div>
+                    <span class="thread-action-badge">✦ Tap to Fasten</span>
+                </div>
+
+                <div class="thread-card" data-index="4">
+                    <div class="thread-info">
+                        <span class="thread-title">4. Tap to Mend Priority & Security</span>
+                        <span class="thread-vow-text">"I promise to make your happiness and security my highest priority."</span>
+                    </div>
+                    <span class="thread-action-badge">✦ Tap to Fasten</span>
+                </div>
+
+                <div class="thread-card" data-index="5">
+                    <div class="thread-info">
+                        <span class="thread-title">5. Tap to Mend Our Beautiful Future</span>
+                        <span class="thread-vow-text">"I promise to hold your hand firmly through any storm we ever face."</span>
+                    </div>
+                    <span class="thread-action-badge">✦ Tap to Fasten</span>
+                </div>
+
+            </div>
+
+            <div class="game-completion-banner" id="game-completion-banner">
+                <div class="completion-title">✨ Our Heart is Fully Healed!</div>
+                <div class="completion-text">Thank you for fastening every golden vow. Our heart is incredibly stronger, deeper, and full of boundless love.</div>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- =================================================================== -->
+        <!-- 🏮 Wish Lantern Release                                            -->
+        <!-- =================================================================== -->
+        <div class="lantern-card" id="lantern-card">
+            <span class="chapter-caption">A Heavenly Wish</span>
+            <h3 class="chapter-title">Our Wish Lantern</h3>
+            <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom:10px;">Before our new fairytale chapter begins, let's release a Sky Lantern carrying our shared wish to the absolute heavens.<br><br><b>Tap the lantern below to magically ignite it and watch it float into the starry sky!</b></p>
+
+            <div class="lantern-interactive-area" id="lantern-interactive-area">
+                <div class="l-star" style="width:3px; height:3px; top:30px; left:20%;"></div>
+                <div class="l-star" style="width:4px; height:4px; top:50px; left:80%;"></div>
+                <div class="l-star" style="width:2px; height:2px; top:120px; left:35%;"></div>
+                <div class="l-star" style="width:5px; height:5px; top:180px; left:75%;"></div>
+                <div class="l-star" style="width:3px; height:3px; top:90px; left:60%;"></div>
+
+                <div class="sky-lantern-elem" id="sky-lantern-elem" title="Tap to release our love lantern!">🏮</div>
+
+                <div class="lantern-helper" id="lantern-helper">
+                    Tap Lantern To Release 
+                </div>
+
+                <div class="lantern-success-toast" id="lantern-success-toast">
+                    "May our new chapter be overflowing with eternal peace, profound joy, and pure lasting love." ✨
+                </div>
+            </div>
+        </div>
+
+        <div class="divider">✦</div>
+
+        <!-- =================================================================== -->
+        <!-- FAIRY TALE ENDING & DIRECT INSTAGRAM BUTTON                         -->
+        <!-- =================================================================== -->
+        <div class="chapter" style="width: 100%; align-items:center;">
+            <span class="chapter-caption">Our Beautiful Future</span>
+            <h2 class="chapter-title" style="text-align:center;">Our Fairy Tale Ending</h2>
+            <div class="chapter-body" style="text-align: center; margin-bottom: 35px;">
+                <p>Every breathtaking fairy tale has a moment where darkness falls, only for true love to find its way back home ... infinitely stronger, deeper, and more exquisite than before.</p>
+                <p>I truly believe in us, and I know in my soul that we will meet again and share our beautiful happily ever after.</p>
+            </div>
+
+            <div class="action-box">
+                <div class="action-question">
+                    May I take you out for a peaceful cup of coffee or dinner, so I can look into your beautiful eyes and apologize properly?
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-main" id="insta-dm-btn">
+                        <span>💌</span> Send Message to Instagram (@definitely_not_batman)
+                    </button>
+                    
+                    <button class="btn-sub" id="need-time-btn">
+                        I need more time...
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Success / Respect Toast Modal -->
+    <div id="portal-toast-modal">
+        <div class="modal-content">
+            <div class="modal-title" id="modal-headline-text">Take All The Time You Need 🌸</div>
+            <div class="modal-text" id="modal-body-text"></div>
+            <a href="https://www.instagram.com/definitely_not_batman/" target="_blank" class="modal-close" id="modal-insta-redirect-link">
+                Open Instagram (@definitely_not_batman) 
+            </a>
+            <button class="btn-sub" id="close-modal-window-btn" style="margin-top:14px; padding:14px;">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        // ... 1. ATMOSPHERE GENERATOR ...
+        const atmosContainer = document.getElementById('atmosphere-container');
+        for (let i = 0; i < 25; i++) {
+            const mote = document.createElement('div');
+            mote.className = 'mote';
+            mote.style.width = `${Math.random() * 5 + 2}px`;
+            mote.style.height = mote.style.width;
+            mote.style.left = `${Math.random() * 90 + 5}vw`; 
+            mote.style.top = `${Math.random() * 100}vh`;
+            mote.style.animationDelay = `${Math.random() * 8}s`;
+            mote.style.animationDuration = `${Math.random() * 6 + 6}s`;
+            atmosContainer.appendChild(mote);
+        }
+
+        // ... 2. ENTRANCE SCREEN & CONFIDENT MUSIC TRIGGER ...
+        const entranceOverlay = document.getElementById('entrance-overlay');
+        const startJourneyBtn = document.getElementById('start-journey-btn');
+        const bgAudioElem = document.getElementById('bg-audio');
+        const songCapsule = document.getElementById('song-capsule');
+        const songStatusText = document.getElementById('song-status-text');
+
+        let isAudioPlaying = false;
+
+        startJourneyBtn.addEventListener('click', () => {
+            entranceOverlay.classList.add('hidden');
+            
+            isAudioPlaying = true;
+            songCapsule.classList.add('playing');
+            songStatusText.textContent = "Playing Our Song 🎶";
+
+            bgAudioElem.play().catch(err => {});
+            
+            setTimeout(initMistWiperCanvas, 300);
+        });
+
+        songCapsule.addEventListener('click', () => {
+            if (isAudioPlaying) {
+                bgAudioElem.pause();
+                isAudioPlaying = false;
+                songCapsule.classList.remove('playing');
+                songStatusText.textContent = "Paused 🔇";
+            } else {
+                isAudioPlaying = true;
+                songCapsule.classList.add('playing');
+                songStatusText.textContent = "Playing Our Song 🎶";
+                bgAudioElem.play().catch(err => {});
+            }
+        });
+
+
+        // ... 3. THE ENDLESS ADORATION DISPENSER ...
+        const dispenseBtn = document.getElementById('dispense-btn');
+        const dispenserQuote = document.getElementById('dispenser-quote');
+        
+        const loveQuotesList = [
+            "I adore how gentle and radiant your eyes look in the sunlight. 🌸",
+            "I cherish our long late-night conversations where the world disappears. ✨",
+            "You bring out the absolute best version of me every single day. 💖",
+            "I love your gorgeous smile that instantly turns my day around. 😊",
+            "I adore how gentle and patient your gorgeous soul is. 🕊️",
+            "You are the most breathtaking girl I have ever laid eyes on. 💕",
+            "I love the deep warmth of your hand resting beautifully inside mine. ♾️",
+            "You are my absolute home, my shelter, and my favorite sanctuary. 🏡",
+            "I cherish every single laugh and silly joke we ever shared together. 🌟"
+        ];
+        
+        let quoteIndex = 0;
+        dispenseBtn.addEventListener('click', () => {
+            quoteIndex = (quoteIndex + 1) % loveQuotesList.length;
+            dispenserQuote.style.animation = 'none';
+            dispenserQuote.offsetHeight; 
+            dispenserQuote.textContent = `"${loveQuotesList[quoteIndex]}"`;
+            dispenserQuote.style.animation = 'fadeInDispense 0.4s ease';
+            playSparkleChime();
+        });
+
+
+        // ... 4. INTimate CORE MEMORY ACCORDION ...
+        const memoryFolders = document.querySelectorAll('.memory-folder');
+        memoryFolders.forEach(folder => {
+            const header = folder.querySelector('.memory-folder-header');
+            header.addEventListener('click', () => {
+                const isOpen = folder.classList.contains('open');
+                memoryFolders.forEach(f => f.classList.remove('open')); 
+                if (!isOpen) {
+                    folder.classList.add('open');
+                    playSparkleChime();
+                }
+            });
+        });
+
+
+        // ... 5. WIPE AWAY THE MIST (HTML CANVAS WIPER) ...
+        const mistCanvasWrapper = document.getElementById('mist-canvas-wrapper');
+        const mistCanvas = document.getElementById('mist-canvas');
+        let mistCtx;
+        let isWiping = false;
+
+        function initMistWiperCanvas() {
+            mistCanvas.width = mistCanvasWrapper.clientWidth;
+            mistCanvas.height = mistCanvasWrapper.clientHeight;
+            mistCtx = mistCanvas.getContext('2d');
+            
+            mistCtx.fillStyle = '#EAE0DD';
+            mistCtx.fillRect(0, 0, mistCanvas.width, mistCanvas.height);
+            
+            mistCtx.fillStyle = '#C85A6A';
+            mistCtx.font = 'italic 500 1.15rem Cormorant Garamond';
+            mistCtx.textAlign = 'center';
+            mistCtx.fillText("✦ Gently wipe away the fog with your finger ✦", mistCanvas.width / 2, mistCanvas.height / 2);
+        }
+
+        function eraseMistAt(clientX, clientY) {
+            if (!mistCtx) return;
+            const rect = mistCanvas.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            mistCtx.globalCompositeOperation = 'destination-out';
+            mistCtx.beginPath();
+            mistCtx.arc(x, y, 36, 0, Math.PI * 2); 
+            mistCtx.fill();
+            mistCtx.globalCompositeOperation = 'source-over';
+        }
+
+        mistCanvas.addEventListener('mousedown', (e) => { isWiping = true; eraseMistAt(e.clientX, e.clientY); });
+        window.addEventListener('mousemove', (e) => { if (isWiping) eraseMistAt(e.clientX, e.clientY); });
+        window.addEventListener('mouseup', () => { isWiping = false; });
+
+        mistCanvas.addEventListener('touchstart', (e) => { eraseMistAt(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+        mistCanvas.addEventListener('touchmove', (e) => { 
+            eraseMistAt(e.touches[0].clientX, e.touches[0].clientY); 
+            e.preventDefault(); 
+        }, { passive: false });
+
+
+        // ... 6. BUTTERFLY MAGIC TOUCH: "HOLD TO SYNC HEARTBEATS" ...
+        const touchRingContainer = document.getElementById('touch-ring-container');
+        const touchPad = document.getElementById('touch-pad');
+        const progressCircleFill = document.getElementById('progress-circle-fill');
+        const butterflyInstruction = document.getElementById('butterfly-instruction');
+        const butterflyCard = document.getElementById('butterfly-card');
+
+        let holdTimer;
+        let holdProgress = 0; 
+        let isHolding = false;
+        let isHeartbeatSynced = false;
+
+        function updateProgressRing() {
+            const circumference = 339.29;
+            const offset = circumference - (holdProgress / 100) * circumference;
+            progressCircleFill.style.strokeDashoffset = offset;
+        }
+
+        function startHoldRoutine(e) {
+            if (isHeartbeatSynced) return;
+            e.preventDefault();
+            isHolding = true;
+            touchPad.classList.add('active');
+            butterflyInstruction.textContent = "‹ Hold Still... Syncing... ›";
+
+            holdTimer = setInterval(() => {
+                if (!isHolding) return;
+                holdProgress += 4; 
+                updateProgressRing();
+
+                if (holdProgress >= 100) {
+                    clearInterval(holdTimer);
+                    isHolding = false;
+                    isHeartbeatSynced = true;
+                    touchPad.textContent = "💖";
+                    butterflyInstruction.textContent = "✨ Our Heartbeats Are Synced ✨";
+                    butterflyCard.classList.add('synced');
+                    trigger2DConfetti();
+                    playSparkleChime();
+                }
+            }, 100);
+        }
+
+        function endHoldRoutine() {
+            if (isHeartbeatSynced) return;
+            isHolding = false;
+            clearInterval(holdTimer);
+            holdProgress = 0;
+            updateProgressRing();
+            touchPad.classList.remove('active');
+            butterflyInstruction.textContent = "‹ Hold Pad to Sync ›";
+        }
+
+        touchRingContainer.addEventListener('mousedown', startHoldRoutine);
+        touchRingContainer.addEventListener('touchstart', startHoldRoutine, { passive: false });
+
+        window.addEventListener('mouseup', endHoldRoutine);
+        window.addEventListener('touchend', endHoldRoutine);
+
+
+        // ... 7. 100% BUG FREE KINTSUGI HEART REPAIR GAME ...
+        const threadCards = document.querySelectorAll('.thread-card');
+        const kintsugiHeartBox = document.getElementById('kintsugi-heart-box');
+        const heartBaseShape = document.getElementById('heart-base-shape');
+        const gameCompletionBanner = document.getElementById('game-completion-banner');
+        
+        let fastenedThreadsCount = 0;
+
+        threadCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (!card.classList.contains('fastened')) {
+                    card.classList.add('fastened');
+                    fastenedThreadsCount++;
+
+                    const fractureIndex = card.getAttribute('data-index');
+                    const targetFracture = document.getElementById(`frac-${fractureIndex}`);
+                    if (targetFracture) {
+                        targetFracture.classList.add('fracture-healed');
+                    }
+
+                    if (fastenedThreadsCount === threadCards.length) {
+                        kintsugiHeartBox.classList.add('healed');
+                        heartBaseShape.classList.add('heart-base-healed');
+                        gameCompletionBanner.classList.add('show');
+                        trigger2DConfetti();
+                        playSparkleChime();
+                    }
+                }
+            });
+        });
+
+
+        // ... 8. WISH LANTERN RELEASE INTERACTION ...
+        const lanternInteractiveArea = document.getElementById('lantern-interactive-area');
+        const lanternHelper = document.getElementById('lantern-helper');
+        const lanternSuccessToast = document.getElementById('lantern-success-toast');
+        let isLanternReleased = false;
+
+        lanternInteractiveArea.addEventListener('click', () => {
+            if (isLanternReleased) return;
+            isLanternReleased = true;
+
+            playSparkleChime();
+            lanternInteractiveArea.classList.add('released');
+            lanternHelper.style.display = 'none';
+
+            setTimeout(() => {
+                lanternSuccessToast.classList.add('show');
+                trigger2DConfetti();
+            }, 1800);
+        });
+
+
+        // ... 9. FLAWLESS FINAL INSTAGRAM DM REDIRECTS ...
+        const instaDmBtn = document.getElementById('insta-dm-btn');
+        const needTimeBtn = document.getElementById('need-time-btn');
+        
+        const portalToastModal = document.getElementById('portal-toast-modal');
+        const modalHeadlineText = document.getElementById('modal-headline-text');
+        const modalBodyText = document.getElementById('modal-body-text');
+        const modalInstaRedirectLink = document.getElementById('modal-insta-redirect-link');
+        const closeModalWindowBtn = document.getElementById('close-modal-window-btn');
+
+        instaDmBtn.addEventListener('click', () => {
+            trigger2DConfetti();
+
+            modalHeadlineText.textContent = "My Heart is Overflowing 💕";
+            modalBodyText.innerHTML = "Thank you so incredibly much for giving us a chance to heal and rewrite our beautiful happily ever after. You have made me the happiest man alive.<br><br><b>Click the button below to open my Instagram (@definitely_not_batman) so we can talk and arrange our coffee date!</b>";
+            
+            modalInstaRedirectLink.style.display = 'inline-block';
+            portalToastModal.classList.add('show');
+            
+            setTimeout(() => {
+                window.open("https://www.instagram.com/definitely_not_batman/", "_blank");
+            }, 800);
+        });
+
+        needTimeBtn.addEventListener('click', () => {
+            modalHeadlineText.textContent = "I Will Always Wait For You 🌸";
+            modalBodyText.innerHTML = "I completely understand and respect your gentle feelings. Rebuilding real, unbreakable trust takes true time, and I am in no rush whatsoever.<br><br>Take all the time your heart needs to heal. I will be right here actively working on becoming the absolute best man for you.<br><br><b>Whenever your beautiful soul is ready, my Instagram is always open for you.</b>";
+            modalInstaRedirectLink.style.display = 'inline-block';
+            portalToastModal.classList.add('show');
+        });
+
+        closeModalWindowBtn.addEventListener('click', () => {
+            portalToastModal.classList.remove('show');
+        });
+
+        // Synthetic Chime Helper
+        function playSparkleChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1046.50, ctx.currentTime + 0.3);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.3);
+            } catch (e) {}
+        }
+
+        // 2D Floating Confetti
+        function trigger2DConfetti() {
+            const container = document.getElementById('confetti-2d-container');
+            container.innerHTML = ''; 
+
+            const flakes = ['💌', '🌸', '💖', '✨', '✦', '🌹', '🦋', '🏮'];
+            for (let i = 0; i < 45; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'confetti-flake';
+                flake.textContent = flakes[Math.floor(Math.random() * flakes.length)];
+                
+                flake.style.left = `${Math.random() * 90 + 5}vw`; 
+                flake.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
+                flake.style.fontSize = `${Math.random() * 0.8 + 1.2}rem`;
+                
+                container.appendChild(flake);
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0e8db326854ff67',t:'MTc4MTkzODQwNA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
